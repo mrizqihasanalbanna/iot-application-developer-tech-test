@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+
+    <title>CAD-IOT!</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0/dist/chart.min.js"></script>
+  </head>
+  <body>
+    <a href="/salary-conversion" class="btn btn-default btn-md">Salary Conversion</a>
+    <a href="/sensor-aggregation" class="btn btn-default btn-md">Sensor Aggregation</a>
+    <a href="/sensor-aggregation-simulation" class="btn btn-success btn-md">Sensor Aggregation Simulation</a>
+    <br /><br />
+    <h1 class="text-center">Sensor Aggregation Simulation!</h1>
+    <div>
+      <div>
+        <h5 class="text-center" style="font-size: 12px; color: rgb(102, 102, 102); padding: 6px">Room Area 1<br /></h5>
+        <div class="container">
+          <div class="row">
+            <div class="col-xl" style="padding: 8px; height: 320px">
+              <h5 class="text-center" style="font-size: 12px; color: rgb(102, 102, 102); padding: 6px">Temperatur</h5>
+              <canvas id="ChartTemperatur1" width="400" height="400"></canvas>
+              <div class="container">
+                <div class="row">
+                  <div class="col-xl">
+                    <div class="card-body" style="width: 50px; border: 1px solid blue; background: rgb(0, 0, 255); padding: 10px">
+                      <h6 class="text-center" style="font-size: 19px; color: rgb(255, 255, 255)" id="MinTemperatur1">0</h6>
+                    </div>
+                  </div>
+                  <div class="col-xl">
+                    <div class="card-body" style="width: 50px; border: 1px solid red; background: rgb(255, 0, 0); padding: 10px">
+                      <h6 class="text-center" style="font-size: 19px; color: rgb(255, 255, 255)" id="MaxTemperatur1">0</h6>
+                    </div>
+                  </div>
+                  <div class="col-xl">
+                    <div class="card-body" style="width: 50px; border: 1px solid yellow; background: rgb(255, 255, 0); padding: 10px">
+                      <h6 class="text-center" style="font-size: 19px; color: rgb(255, 255, 255)" id="MedianTemperatur1">0</h6>
+                    </div>
+                  </div>
+                  <div class="col-xl">
+                    <div class="card-body" style="width: 50px; border: 1px solid green; background: rgb(0, 255, 0); padding: 10px">
+                      <h6 class="text-center" style="font-size: 19px; color: rgb(255, 255, 255)" id="AverangeTemperatur1">0</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl" style="padding: 8px; height: 320px">
+              <h5 class="text-center" style="font-size: 12px; color: rgb(102, 102, 102); padding: 6px">Humadity</h5>
+              <canvas id="ChartHumadity1" width="400" height="400"></canvas>
+              <div class="container">
+                <div class="row">
+                  <div class="col-xl">
+                    <div class="card-body" style="width: 50px; border: 1px solid blue; background: rgb(0, 0, 255); padding: 10px">
+                      <h6 class="text-center" style="font-size: 19px; color: rgb(255, 255, 255)" id="MinHumadity1">0</h6>
+                    </div>
+                  </div>
+                  <div class="col-xl">
+                    <div class="card-body" style="width: 50px; border: 1px solid red; background: rgb(255, 0, 0); padding: 10px">
+                      <h6 class="text-center" style="font-size: 19px; color: rgb(255, 255, 255)" id="MaxHumadity1">0</h6>
+                    </div>
+                  </div>
+                  <div class="col-xl">
+                    <div class="card-body" style="width: 50px; border: 1px solid yellow; background: rgb(255, 255, 0); padding: 10px">
+                      <h6 class="text-center" style="font-size: 19px; color: rgb(255, 255, 255)" id="MedianHumadity1">0</h6>
+                    </div>
+                  </div>
+                  <div class="col-xl">
+                    <div class="card-body" style="width: 50px; border: 1px solid green; background: rgb(0, 255, 0); padding: 10px">
+                      <h6 class="text-center" style="font-size: 19px; color: rgb(255, 255, 255)" id="AverangeHumadity1">0</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="padding: 80px; height: 360px">
+        <h5 class="text-center" style="font-size: 12px; color: rgb(102, 102, 102); padding: 6px">Room Area 2<br /></h5>
+        <div class="container">
+          <div class="row">
+            <div class="col-xl" style="padding: 8px; height: 320px">
+              <h5 class="text-center" style="font-size: 12px; color: rgb(102, 102, 102); padding: 6px">Temperatur</h5>
+              <canvas id="ChartTemperatur2" width="400" height="400"></canvas>
+              <div class="container">
+                <div class="row">
+                  <div class="col-xl">
+                    <div class="card-body" style="width: 50px; border: 1px solid blue; background: rgb(0, 0, 255); padding: 10px">
+                      <h6 class="text-center" style="font-size: 19px; color: rgb(255, 255, 255)" id="MinTemperatur2">0</h6>
+                    </div>
+                  </div>
+                  <div class="col-xl">
+                    <div class="card-body" style="width: 50px; border: 1px solid red; background: rgb(255, 0, 0); padding: 10px">
+                      <h6 class="text-center" style="font-size: 19px; color: rgb(255, 255, 255)" id="MaxTemperatur2">0</h6>
+                    </div>
+                  </div>
+                  <div class="col-xl">
+                    <div class="card-body" style="width: 50px; border: 1px solid yellow; background: rgb(255, 255, 0); padding: 10px">
+                      <h6 class="text-center" style="font-size: 19px; color: rgb(255, 255, 255)" id="MedianTemperatur2">0</h6>
+                    </div>
+                  </div>
+                  <div class="col-xl">
+                    <div class="card-body" style="width: 50px; border: 1px solid green; background: rgb(0, 255, 0); padding: 10px">
+                      <h6 class="text-center" style="font-size: 19px; color: rgb(255, 255, 255)" id="AverangeTemperatur2">0</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl" style="padding: 8px; height: 320px">
+              <h5 class="text-center" style="font-size: 12px; color: rgb(102, 102, 102); padding: 6px">Humadity</h5>
+              <canvas id="ChartHumadity2" width="400" height="400"></canvas>
+              <div class="container">
+                <div class="row">
+                  <div class="col-xl">
+                    <div class="card-body" style="width: 50px; border: 1px solid blue; background: rgb(0, 0, 255); padding: 10px">
+                      <h6 class="text-center" style="font-size: 19px; color: rgb(255, 255, 255)" id="MinHumadity2">0</h6>
+                    </div>
+                  </div>
+                  <div class="col-xl">
+                    <div class="card-body" style="width: 50px; border: 1px solid red; background: rgb(255, 0, 0); padding: 10px">
+                      <h6 class="text-center" style="font-size: 19px; color: rgb(255, 255, 255)" id="MaxHumadity2">0</h6>
+                    </div>
+                  </div>
+                  <div class="col-xl">
+                    <div class="card-body" style="width: 50px; border: 1px solid yellow; background: rgb(255, 255, 0); padding: 10px">
+                      <h6 class="text-center" style="font-size: 19px; color: rgb(255, 255, 255)" id="MedianHumadity2">0</h6>
+                    </div>
+                  </div>
+                  <div class="col-xl">
+                    <div class="card-body" style="width: 50px; border: 1px solid green; background: rgb(0, 255, 0); padding: 10px">
+                      <h6 class="text-center" style="font-size: 19px; color: rgb(255, 255, 255)" id="AverangeHumadity2">0</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer style="padding: 150px">
+      <h6 class="text-center" style="font-size: 10px; color: rgb(102, 102, 102); padding: 6px">© 2021 M Rizqi Hasan Al Banna - Teknik Komputer PENS<br /></h6>
+    </footer>
+  </body>
+  <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+  <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
+  <script>
+    //room area 1
+    var timeStampTemperatur1 = [],
+      MinTemperatur1 = [],
+      MaxTemperatur1 = [],
+      MedianTemperatur1 = [],
+      AverangeTemperatur1 = [];
+    function showGraphTemperature1() {
+      var ctx = document.getElementById('ChartTemperatur1').getContext('2d');
+      var Chart2 = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: timeStampTemperatur1, //Bottom Labeling
+          datasets: [
+            {
+              label: 'Min',
+              fill: false, //Try with true
+              backgroundColor: 'rgba( 0,0, 255 , 1)', //Dot marker color
+              borderColor: 'rgba( 0, 0, 255 , 1)', //Graph Line Color
+              data: MinTemperatur1,
+            },
+            {
+              label: 'Max',
+              fill: false, //Try with true
+              backgroundColor: 'rgba( 255, 0, 0 , 1)', //Dot marker color
+              borderColor: 'rgba( 255, 0, 0 , 1)', //Graph Line Color
+              data: MaxTemperatur1,
+            },
+            {
+              label: 'Median',
+              fill: false, //Try with true
+              backgroundColor: 'rgba( 255, 255, 0 , 1)', //Dot marker color
+              borderColor: 'rgba( 255, 255, 0, 1)', //Graph Line Color
+              data: MedianTemperatur1,
+            },
+            {
+              label: 'Averange',
+              fill: false, //Try with true
+              backgroundColor: 'rgba( 0, 255, 0 , 1)', //Dot marker color
+              borderColor: 'rgba( 0, 255, 0, 1)', //Graph Line Color
+              data: AverangeTemperatur1,
+            },
+          ],
+        },
+        options: {
+          animation: false,
+          title: {
+            display: true,
+            text: 'Data Grafik',
+          },
+          maintainAspectRatio: false,
+          elements: {
+            line: {
+              tension: 0,
+            },
+          },
+          scales: {
+            y: {
+              ticks: {
+                beginAtZero: false,
+              },
+            },
+          },
+        },
+      });
+    }
+    var timeStampHumadity1 = [],
+      MinHumadity1 = [],
+      MaxHumadity1 = [],
+      MedianHumadity1 = [],
+      AverangeHumadity1 = [];
+    function showGraphHumadity1() {
+      var ctx = document.getElementById('ChartHumadity1').getContext('2d');
+      var Chart2 = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: timeStampHumadity1, //Bottom Labeling
+          datasets: [
+            {
+              label: 'Min',
+              fill: false, //Try with true
+              backgroundColor: 'rgba( 0,0, 255 , 1)', //Dot marker color
+              borderColor: 'rgba( 0, 0, 255 , 1)', //Graph Line Color
+              data: MinHumadity1,
+            },
+            {
+              label: 'Max',
+              fill: false, //Try with true
+              backgroundColor: 'rgba( 255, 0, 0 , 1)', //Dot marker color
+              borderColor: 'rgba( 255, 0, 0 , 1)', //Graph Line Color
+              data: MaxHumadity1,
+            },
+            {
+              label: 'Median',
+              fill: false, //Try with true
+              backgroundColor: 'rgba( 255, 255, 0 , 1)', //Dot marker color
+              borderColor: 'rgba( 255, 255, 0, 1)', //Graph Line Color
+              data: MedianHumadity1,
+            },
+            {
+              label: 'Averange',
+              fill: false, //Try with true
+              backgroundColor: 'rgba( 0, 255, 0 , 1)', //Dot marker color
+              borderColor: 'rgba( 0, 255, 0, 1)', //Graph Line Color
+              data: AverangeHumadity1,
+            },
+          ],
+        },
+        options: {
+          animation: false,
+          title: {
+            display: true,
+            text: 'Data Grafik',
+          },
+          maintainAspectRatio: false,
+          elements: {
+            line: {
+              tension: 0,
+            },
+          },
+          scales: {
+            y: {
+              ticks: {
+                beginAtZero: false,
+              },
+            },
+          },
+        },
+      });
+    }
+    //data room area 2
+    var timeStampTemperatur2 = [],
+      MinTemperatur2 = [],
+      MaxTemperatur2 = [],
+      MedianTemperatur2 = [],
+      AverangeTemperatur2 = [];
+    function showGraphTemperature2() {
+      var ctx = document.getElementById('ChartTemperatur2').getContext('2d');
+      var Chart2 = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: timeStampTemperatur2, //Bottom Labeling
+          datasets: [
+            {
+              label: 'Min',
+              fill: false, //Try with true
+              backgroundColor: 'rgba( 0,0, 255 , 1)', //Dot marker color
+              borderColor: 'rgba( 0, 0, 255 , 1)', //Graph Line Color
+              data: MinTemperatur2,
+            },
+            {
+              label: 'Max',
+              fill: false, //Try with true
+              backgroundColor: 'rgba( 255, 0, 0 , 1)', //Dot marker color
+              borderColor: 'rgba( 255, 0, 0 , 1)', //Graph Line Color
+              data: MaxTemperatur2,
+            },
+            {
+              label: 'Median',
+              fill: false, //Try with true
+              backgroundColor: 'rgba( 255, 255, 0 , 1)', //Dot marker color
+              borderColor: 'rgba( 255, 255, 0, 1)', //Graph Line Color
+              data: MedianTemperatur2,
+            },
+            {
+              label: 'Averange',
+              fill: false, //Try with true
+              backgroundColor: 'rgba( 0, 255, 0 , 1)', //Dot marker color
+              borderColor: 'rgba( 0, 255, 0, 1)', //Graph Line Color
+              data: AverangeTemperatur2,
+            },
+          ],
+        },
+        options: {
+          animation: false,
+          title: {
+            display: true,
+            text: 'Data Grafik',
+          },
+          maintainAspectRatio: false,
+          elements: {
+            line: {
+              tension: 0,
+            },
+          },
+          scales: {
+            y: {
+              ticks: {
+                beginAtZero: false,
+              },
+            },
+          },
+        },
+      });
+    }
+    var timeStampHumadity2 = [],
+      MinHumadity2 = [],
+      MaxHumadity2 = [],
+      MedianHumadity2 = [],
+      AverangeHumadity2 = [];
+    function showGraphHumadity2() {
+      var ctx = document.getElementById('ChartHumadity2').getContext('2d');
+      var Chart2 = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: timeStampHumadity2, //Bottom Labeling
+          datasets: [
+            {
+              label: 'Min',
+              fill: false, //Try with true
+              backgroundColor: 'rgba( 0,0, 255 , 1)', //Dot marker color
+              borderColor: 'rgba( 0, 0, 255 , 1)', //Graph Line Color
+              data: MinHumadity2,
+            },
+            {
+              label: 'Max',
+              fill: false, //Try with true
+              backgroundColor: 'rgba( 255, 0, 0 , 1)', //Dot marker color
+              borderColor: 'rgba( 255, 0, 0 , 1)', //Graph Line Color
+              data: MaxHumadity2,
+            },
+            {
+              label: 'Median',
+              fill: false, //Try with true
+              backgroundColor: 'rgba( 255, 255, 0 , 1)', //Dot marker color
+              borderColor: 'rgba( 255, 255, 0, 1)', //Graph Line Color
+              data: MedianHumadity2,
+            },
+            {
+              label: 'Averange',
+              fill: false, //Try with true
+              backgroundColor: 'rgba( 0, 255, 0 , 1)', //Dot marker color
+              borderColor: 'rgba( 0, 255, 0, 1)', //Graph Line Color
+              data: AverangeHumadity2,
+            },
+          ],
+        },
+        options: {
+          animation: false,
+          title: {
+            display: true,
+            text: 'Data Grafik',
+          },
+          maintainAspectRatio: false,
+          elements: {
+            line: {
+              tension: 0,
+            },
+          },
+          scales: {
+            y: {
+              ticks: {
+                beginAtZero: false,
+              },
+            },
+          },
+        },
+      });
+    }
+    var counter = 0,
+      counter2 = 0,
+      nilaiTerkecil = 1000,
+      nilaiTerbesar = 0,
+      nilaiRataRata = 0,
+      nilaiTerkecilH = 1000,
+      nilaiTerbesarH = 0,
+      nilaiRataRataH = 0,
+      date = '',
+      //area room 2
+      nilaiTerkecil2 = 1000,
+      nilaiTerbesar2 = 0,
+      nilaiRataRata2 = 0,
+      nilaiTerkecilH2 = 1000,
+      nilaiTerbesarH2 = 0,
+      nilaiRataRataH2 = 0,
+      date2 = '';
+    //get data json and push
+    $.ajax({
+      url: 'http://localhost:3001/api/sensor',
+      typeof: 'GET',
+      dataType: 'json',
+      success: (resSensor) => {
+        $.each(resSensor.array, (index, data) => {
+          //console.log(data);
+          if (data.roomArea == 'roomArea1') {
+            var time = new Date(data.timestamp);
+            date = time.getDate() + '/' + (time.getMonth() + 1) + '/' + time.getFullYear() + ' ' + time.getHours() + ':' + time.getMinutes() + ':' + time.getSeconds();
+            //temperature
+            if (nilaiTerkecil > data.temperature) {
+              nilaiTerkecil = data.temperature;
+            }
+            if (nilaiTerbesar < data.temperature) {
+              nilaiTerbesar = data.temperature;
+            }
+            nilaiRataRata += data.temperature;
+            //humadity
+            if (nilaiTerkecilH > data.humidity) {
+              nilaiTerkecilH = data.humidity;
+            }
+            if (nilaiTerbesarH < data.humidity) {
+              nilaiTerbesarH = data.humidity;
+            }
+            nilaiRataRataH += data.humidity;
+            //push data setiap 10 jam
+            if (counter >= 20) {
+              //temperatur
+              timeStampTemperatur1.push(date);
+              MinTemperatur1.push(nilaiTerkecil);
+              document.getElementById('MinTemperatur1').innerHTML = nilaiTerkecil.toFixed(1);
+              MaxTemperatur1.push(nilaiTerbesar);
+              document.getElementById('MaxTemperatur1').innerHTML = nilaiTerbesar.toFixed(1);
+              MedianTemperatur1.push();
+              document.getElementById('MedianTemperatur1').innerHTML = 0;
+              AverangeTemperatur1.push(nilaiRataRata / 20);
+              document.getElementById('AverangeTemperatur1').innerHTML = (nilaiRataRata / 20).toFixed(1);
+              nilaiRataRata = 0;
+              nilaiTerkecil = 1000;
+              nilaiTerbesar = 0;
+              //humadity
+              timeStampHumadity1.push(date);
+              MinHumadity1.push(nilaiTerkecilH);
+              document.getElementById('MinHumadity1').innerHTML = nilaiTerkecilH.toFixed(1);
+              MaxHumadity1.push(nilaiTerbesarH);
+              document.getElementById('MaxHumadity1').innerHTML = nilaiTerbesarH.toFixed(1);
+              MedianHumadity1.push();
+              document.getElementById('MedianHumadity1').innerHTML = 0;
+              AverangeHumadity1.push(nilaiRataRataH / 20);
+              document.getElementById('AverangeHumadity1').innerHTML = (nilaiRataRataH / 20).toFixed(1);
+              nilaiRataRataH = 0;
+              nilaiTerkecilH = 1000;
+              nilaiTerbesarH = 0;
+              counter = 0;
+            }
+            counter++;
+          } else if (data.roomArea == 'roomArea2') {
+            var time = new Date(data.timestamp);
+            date2 = time.getDate() + '/' + (time.getMonth() + 1) + '/' + time.getFullYear() + ' ' + time.getHours() + ':' + time.getMinutes() + ':' + time.getSeconds();
+            //temperature
+            if (nilaiTerkecil2 > data.temperature) {
+              nilaiTerkecil2 = data.temperature;
+            }
+            if (nilaiTerbesar2 < data.temperature) {
+              nilaiTerbesar2 = data.temperature;
+            }
+            nilaiRataRata2 += data.temperature;
+            //humadity
+            if (nilaiTerkecilH2 > data.humidity) {
+              nilaiTerkecilH2 = data.humidity;
+            }
+            if (nilaiTerbesarH2 < data.humidity) {
+              nilaiTerbesarH2 = data.humidity;
+            }
+            nilaiRataRataH2 += data.humidity;
+            //push data setiap 10 jam
+            if (counter2 >= 20) {
+              //temperatur
+              timeStampTemperatur2.push(date2);
+              MinTemperatur2.push(nilaiTerkecil2);
+              document.getElementById('MinTemperatur2').innerHTML = nilaiTerkecil2.toFixed(1);
+              MaxTemperatur2.push(nilaiTerbesar2);
+              document.getElementById('MaxTemperatur2').innerHTML = nilaiTerbesar2.toFixed(1);
+              MedianTemperatur2.push();
+              document.getElementById('MedianTemperatur2').innerHTML = 0;
+              AverangeTemperatur2.push(nilaiRataRata2 / 20);
+              document.getElementById('AverangeTemperatur2').innerHTML = (nilaiRataRata2 / 20).toFixed(1);
+              nilaiRataRata2 = 0;
+              nilaiTerkecil2 = 1000;
+              nilaiTerbesar2 = 0;
+              //humadity
+              timeStampHumadity2.push(date2);
+              MinHumadity2.push(nilaiTerkecilH2);
+              document.getElementById('MinHumadity2').innerHTML = nilaiTerkecilH2.toFixed(1);
+              MaxHumadity2.push(nilaiTerbesarH2);
+              document.getElementById('MaxHumadity2').innerHTML = nilaiTerbesarH2.toFixed(1);
+              MedianHumadity2.push();
+              document.getElementById('MedianHumadity2').innerHTML = 0;
+              AverangeHumadity2.push(nilaiRataRataH2 / 20);
+              document.getElementById('AverangeHumadity2').innerHTML = (nilaiRataRataH2 / 20).toFixed(1);
+              nilaiRataRataH2 = 0;
+              nilaiTerkecilH2 = 1000;
+              nilaiTerbesarH2 = 0;
+              counter2 = 0;
+            }
+            counter2++;
+          }
+        });
+        showGraphTemperature1();
+        showGraphHumadity1();
+        showGraphTemperature2();
+        showGraphHumadity2();
+      },
+      error: (err) => console.log(err),
+    });
+  </script>
+</html>

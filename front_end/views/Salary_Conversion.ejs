@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+
+    <title>CAD-IOT!</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <a href="/salary-conversion" class="btn btn-success btn-md">Salary Conversion</a>
+    <a href="/sensor-aggregation" class="btn btn-default btn-md">Sensor Aggregation</a>
+    <a href="/sensor-aggregation-simulation" class="btn btn-default btn-md">Sensor Aggregation Simulation</a>
+    <br /><br />
+    <h1 class="text-center">Salary Conversion!</h1>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th>Phone</th>
+          <th>Salary in IDR</th>
+          <th>Salary in USD</th>
+        </tr>
+      </thead>
+      <tbody id="salary"></tbody>
+    </table>
+    <footer style="height: 20px">
+      <h6 class="text-center" style="font-size: 10px; color: rgb(102, 102, 102); padding: 6px">© 2021 M Rizqi Hasan Al Banna - Teknik Komputer PENS<br /></h6>
+    </footer>
+    <script>
+      $.ajax({
+        url: 'http://localhost:3001/api/salary',
+        typeof: 'GET',
+        dataType: 'json',
+        success: (reSalary) => {
+          $.ajax({
+            url: 'https://freecurrencyapi.net/api/v2/latest?apikey=8d463320-4133-11ec-ae34-b9e9f77c52de&base_currency=IDR',
+            typeof: 'GET',
+            dataType: 'json',
+            success: (converterSalary) => {
+              for (let index = 0; index < reSalary.array.length; index++) {
+                reSalary.array[index].salaryInUSD = reSalary.array[index].salaryInIDR * converterSalary.data.USD;
+              }
+              console.log(reSalary);
+              $.ajax({
+                url: 'http://jsonplaceholder.typicode.com/users',
+                typeof: 'GET',
+                dataType: 'json',
+                success: (res) => {
+                  for (let index = 0; index < res.length; index++) {
+                    res[index].salaryInUSD = reSalary.array[index].salaryInUSD;
+                    res[index].salaryInIDR = reSalary.array[index].salaryInIDR;
+                  }
+                  var html;
+                  $.each(res, (index, data) => {
+                    console.log(data);
+                    html += '<tr><td>' + data.id + '</td>';
+                    html += '<td>' + data.name + '</td>';
+                    html += '<td>' + data.username + '</td>';
+                    html += '<td>' + data.email + '</td>';
+                    html += '<td>' + data.address.street + ' ' + data.address.city + '</td>';
+                    html += '<td>' + data.phone + '</td>';
+                    html += '<td>' + data.salaryInIDR + '</td>';
+                    html += '<td>' + data.salaryInUSD + '</td></tr>';
+                  });
+                  $('#salary').html(html);
+                },
+                error: (errConverter) => console.log(errConverter),
+              });
+            },
+            error: (errConverter) => console.log(errConverter),
+          });
+        },
+        error: (err) => console.log(err),
+      });
+    </script>
+    <!--script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script-->
+  </body>
+</html>
